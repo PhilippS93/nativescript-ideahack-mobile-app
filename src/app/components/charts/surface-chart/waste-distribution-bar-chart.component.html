@@ -1,0 +1,24 @@
+<StackLayout width="100%">
+    <WebView #container
+             marginBottom="10"
+             marginTop="10"
+             (loaded)="onWebViewLoaded($event)"
+             isUserInteractionEnabled="false"
+             [src]="src"
+             width="100%"
+             borderRadius="{{10}}"
+             height="{{height}}"
+             horizontalAlignment="center"
+             verticalAlignment="center"></WebView>
+    <FlexboxLayout *ngIf="surfaces && legendEnabled" marginTop="10" horizontalAlignment="center" padding="0 10" flexDirection="row" alignContent="space-around" flexWrap="wrap">
+        <GridLayout *ngFor="let surface of surfaces" marginBottom="5" marginRight="10" height="20" columns="auto, auto, auto">
+            <StackLayout width="16"
+                         height="16"
+                         borderRadius="8"
+                         marginRight="5"
+                         col="0"
+                         [backgroundColor]="surface.color"></StackLayout>
+            <Label [text]="surface.name" col="1" class="smaller-text"></Label>
+        </GridLayout>
+    </FlexboxLayout>
+</StackLayout>

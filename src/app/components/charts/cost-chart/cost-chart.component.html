@@ -1,0 +1,12 @@
+<StackLayout #container width="100%" margin="5 0">
+    <WebView #webview
+             (loaded)="onWebViewLoaded($event)"
+             isUserInteractionEnabled="false"
+             isEnabled="false"
+             [src]="src"
+             width="100%"
+             height="{{height}}"
+             horizontalAlignment="center"
+             verticalAlignment="center"
+             ></WebView>
+</StackLayout>

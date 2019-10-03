@@ -1,0 +1,86 @@
+@import "home";
+
+.action-bar {
+  border-color: transparent;
+  border-width: 1;
+}
+
+.home {
+
+  .header {
+    padding-top: 10;
+    background-color:  $accent-dark;
+
+    .chart-date-selectors {
+      .selector {
+        padding: 10;
+        padding-left: 15;
+        padding-right: 15;
+
+        &.enabled {
+          background-color: darken($accent-dark, 20%);
+          color: white;
+          border-radius: 1000;
+        }
+      }
+    }
+
+    .price-wrapper {
+      color: white;
+      font-size: 55;
+      margin: 30;
+    }
+
+  }
+
+  .bar-chart-wrapper {
+    margin-left: 30;
+    margin-right: 30;
+  }
+
+  .list {
+    .heading {
+      font-size: 30;
+      margin-top: 30;
+      margin-bottom: 30;
+      margin-left: 20;
+    }
+
+    .item {
+      height: 80;
+      border-bottom-color: black;
+      border-bottom-width: 1;
+
+      &.first {
+        border-top-color: black;
+        border-top-width: 1;
+      }
+
+      .image-wrapper {
+        margin: 10;
+        border-color: black;
+        border-width: 1;
+        border-radius: 1000;
+
+        image {
+          margin: 10;
+        }
+      }
+
+      .content-wrapper {
+        vertical-align: center;
+        margin-left: 10;
+
+        .item-heading {
+          font-weight: bold;
+          font-size: 20;
+        }
+
+        .item-sub {
+          color: red;
+          font-size: 15;
+        }
+      }
+    }
+  }
+}

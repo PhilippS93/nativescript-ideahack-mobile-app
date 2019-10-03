@@ -1,0 +1,77 @@
+<ActionBar class="action-bar" flat="true">
+    <!--
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton (tap)="onDrawerButtonTap()" icon="res://menu" ios:visibility="collapsed"></NavigationButton>
+    <!--
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem (tap)="onDrawerButtonTap()" android:visibility="collapsed" icon="res://navigation/menu"
+                ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="TWASTE"></Label>
+</ActionBar>
+
+<ScrollView>
+    <GridLayout class="home" rows="auto, auto, *">
+
+        <GridLayout class="header" row="0" rows="auto, auto, auto">
+            <GridLayout class="chart-date-selectors" columns="*, *, *, *" row="0">
+                <Label (tap)="selectedChartIndex(0)" [class.enabled]="_selectedChartIndex === 0" class="selector"
+                       col="0" horizontalAlignment="center"
+                       text="day"></Label>
+                <Label (tap)="selectedChartIndex(1)" [class.enabled]="_selectedChartIndex === 1" class="selector"
+                       col="1" horizontalAlignment="center"
+                       text="week"></Label>
+                <Label (tap)="selectedChartIndex(2)" [class.enabled]="_selectedChartIndex === 2" class="selector"
+                       col="2" horizontalAlignment="center"
+                       text="month"></Label>
+                <Label (tap)="selectedChartIndex(3)" [class.enabled]="_selectedChartIndex === 3" class="selector"
+                       col="3" horizontalAlignment="center"
+                       text="year"></Label>
+            </GridLayout>
+
+            <StackLayout class="price-wrapper" horizontalAlignment="center" row="1">
+                <Label text="{{totalAmount}}€"></Label>
+            </StackLayout>
+
+            <StackLayout row="2">
+                <ns-cost-chart *ngIf="loaded"
+                               [data]="costChartData"></ns-cost-chart>
+            </StackLayout>
+        </GridLayout>
+
+        <StackLayout class="bar-chart-wrapper" row="1">
+            <ns-waste-distribution-bar-chart *ngIf="loaded"
+                                             [surfaceData]="wasteDistribution"></ns-waste-distribution-bar-chart>
+        </StackLayout>
+
+        <StackLayout class="list" orientation="vertical" row="2">
+            <Label class="heading" text="Deine Tonnen"></Label>
+
+            <StackLayout (tap)="openBin(bin)" *ngFor="let bin of bins; let first = first">
+                <GridLayout [class.first]="first" class="item" columns="auto, *">
+                    <StackLayout class="image-wrapper" col="0">
+                        <image *ngIf="bin.type === 'BLUE'" src="res://paper"></image>
+                        <image *ngIf="bin.type === 'GREEN'" src="res://bio"></image>
+                        <image *ngIf="bin.type === 'YELLOW'" src="res://plastic"></image>
+                        <image *ngIf="bin.type === 'BLACK'" src="res://residual_waste"></image>
+                    </StackLayout>
+
+                    <StackLayout class="content-wrapper" col="1" orientation="vertical">
+                        <Label *ngIf="bin.type === 'BLUE'" text="Paper" class="item-heading"></Label>
+                        <Label *ngIf="bin.type === 'GREEN'" text="Bio" class="item-heading"></Label>
+                        <Label *ngIf="bin.type === 'YELLOW'" text="Plastic" class="item-heading"></Label>
+                        <Label *ngIf="bin.type === 'BLACK'" text="Residual waste" class="item-heading"></Label>
+
+                        <Label class="item-sub" text="{{bin.percentage}} %"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+
+        </StackLayout>
+    </GridLayout>
+</ScrollView>
